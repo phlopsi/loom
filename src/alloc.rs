@@ -24,6 +24,11 @@ pub unsafe fn dealloc(ptr: *mut u8, layout: Layout) {
     std::alloc::dealloc(ptr, layout)
 }
 
+/// Deallocate memory with the global allocator.
+pub fn assert_tracked(ptr: *mut u8) {
+    rt::assert_tracked(ptr);
+}
+
 /// Track allocations, detecting leaks
 #[derive(Debug)]
 pub struct Track<T> {

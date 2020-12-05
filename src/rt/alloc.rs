@@ -38,6 +38,16 @@ pub(crate) fn dealloc(ptr: *mut u8) {
     drop(allocation);
 }
 
+/// Track a raw pointer
+pub(crate) fn assert_tracked(ptr: *mut u8) {
+    rt::execution(|execution| {
+        assert!(
+            execution.raw_allocations.contains_key(&(ptr as usize)),
+            "pointer not tracked"
+        )
+    });
+}
+
 impl Allocation {
     pub(crate) fn new() -> Allocation {
         rt::execution(|execution| {
