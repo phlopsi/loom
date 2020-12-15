@@ -2,6 +2,7 @@ mod access;
 use self::access::Access;
 
 mod alloc;
+pub use self::alloc::__assert_tracked;
 pub(crate) use self::alloc::{alloc, dealloc, Allocation};
 
 mod arc;

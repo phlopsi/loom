@@ -147,7 +147,9 @@ macro_rules! dbg {
 #[macro_use]
 mod rt;
 
+#[macro_use]
 pub mod alloc;
+
 pub mod cell;
 pub mod lazy_static;
 pub mod model;
@@ -156,6 +158,9 @@ pub mod thread;
 
 #[doc(inline)]
 pub use crate::model::model;
+
+#[doc(hidden)]
+pub use crate::rt::__assert_tracked;
 
 if_futures! {
     pub mod future;

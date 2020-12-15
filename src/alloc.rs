@@ -55,3 +55,12 @@ impl<T> Track<T> {
         self.value
     }
 }
+
+/// TODO
+#[macro_export]
+macro_rules! raw_deref {
+    ($ptr:expr) => {
+        $crate::__assert_tracked($ptr as _);
+        &*$ptr
+    };
+}

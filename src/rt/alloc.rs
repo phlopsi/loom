@@ -62,3 +62,13 @@ impl State {
         assert!(self.is_dropped, "object leaked");
     }
 }
+
+#[doc(hidden)]
+pub fn __assert_tracked(ptr: *mut u8) {
+    rt::execution(|execution| {
+        assert!(
+            execution.raw_allocations.contains_key(&(ptr as usize)),
+            "pointer not tracked"
+        )
+    });
+}
